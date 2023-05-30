@@ -1,0 +1,2 @@
+psutil==5.9.5
+llama-index==0.6.14
