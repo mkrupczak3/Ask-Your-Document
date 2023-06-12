@@ -3,12 +3,11 @@ import argparse
 import openai
 from pathlib import Path
 from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader, download_loader, StorageContext, load_index_from_storage
-uro
 # You must obtain an API key from OpenAI for use of this script:
 # https://platform.openai.com/account/api-keys
 #
 # TODO Replace this with your API key!
-DEFAULT_OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'
+DEFAULT_OPENAI_API_KEY = 'YOUR_OPENAI_KEY_HERE'
 
 def main():
     parser = argparse.ArgumentParser(description='Create a VectorStoreIndex from a PDF and query it.')
