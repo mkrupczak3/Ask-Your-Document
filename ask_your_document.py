@@ -1,6 +1,7 @@
 import os
 import argparse
 import openai
+import re
 from pathlib import Path
 from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader, download_loader, StorageContext, load_index_from_storage
 # You must obtain an API key from OpenAI for use of this script:
@@ -8,6 +9,10 @@ from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader, download_loa
 #
 # TODO Replace this with your API key!
 DEFAULT_OPENAI_API_KEY = 'YOUR_OPENAI_KEY_HERE'
+
+def sanitize_filename(filename):
+    # Remove any non-alphanumeric characters (except for underscores and hyphens)
+    return re.sub(r'[^\w\-_]', '', filename)
 
 def main():
     parser = argparse.ArgumentParser(description='Create a VectorStoreIndex from a PDF and query it.')
@@ -26,7 +31,9 @@ def main():
     os.environ["OPENAI_API_KEY"] = api_key
 
     storage_dir = Path('./storage')
-    docstore_file = storage_dir / 'docstore.json'
+    # Sanitize the filename and create a unique docstore file based on the pdf filename
+    docstore_filename = sanitize_filename(Path(args.pdf).stem) + '_docstore.json'
+    docstore_file = storage_dir / docstore_filename
 
     try:
         if docstore_file.is_file():
