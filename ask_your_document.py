@@ -23,7 +23,7 @@ def main():
     args = parser.parse_args()
 
     api_key = args.key or DEFAULT_OPENAI_API_KEY
-    if api_key == 'YOUR_OPENAI_API_KEY':
+    if api_key == 'YOUR_OPENAI_KEY_HERE':
         print("You must replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key in the script, or provide it using the --key flag.")
         print("For example: python3 ask_your_document.py --key 'YOUR_OPENAI_API_KEY' 'document.pdf 'What is the title of this document?'")
         return
