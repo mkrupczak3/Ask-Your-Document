@@ -3,12 +3,13 @@ import argparse
 import openai
 import re
 from pathlib import Path
-from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader, download_loader, StorageContext, load_index_from_storage
+from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader, download_loader, StorageContext, load_index_from_storage, KeywordTableIndex, SimpleDirectoryReader, LLMPredictor, ServiceContext
+from llama_index.llms import OpenAI
 # You must obtain an API key from OpenAI for use of this script:
 # https://platform.openai.com/account/api-keys
 #
 # TODO Replace this with your API key!
-DEFAULT_OPENAI_API_KEY = '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'
+DEFAULT_OPENAI_API_KEY = 'YOUR_OPENAI_KEY_HERE'
 
 def sanitize_filename(filename):
     # Remove any non-alphanumeric characters (except for underscores and hyphens)
@@ -31,22 +32,17 @@ def main():
     os.environ["OPENAI_API_KEY"] = api_key
     openai.api_key = api_key
 
-    storage_dir = Path('./storage')
-    # Sanitize the filename and create a unique docstore file based on the pdf filename
-    docstore_filename = sanitize_filename(Path(args.pdf).stem) + '_docstore.json'
-    docstore_file = storage_dir / docstore_filename
+    # define LLM
+    llm = OpenAI(temperature=0, model="gpt-3.5-turbo-16k")
+    service_context = ServiceContext.from_defaults(llm=llm)
 
     try:
-        if docstore_file.is_file():
-            storage_context = StorageContext.from_defaults(persist_dir=storage_dir)
-            index = load_index_from_storage(storage_context)
-        else:
-            PyMuPDFReader = download_loader("PyMuPDFReader")
-            loader = PyMuPDFReader()
-            documents = loader.load(file_path=Path(args.pdf), metadata=True)
+        PyMuPDFReader = download_loader("PyMuPDFReader")
+        loader = PyMuPDFReader()
+        documents = loader.load(file_path=Path(args.pdf), metadata=True)
 
-            index = GPTVectorStoreIndex.from_documents(documents)
-            index.storage_context.persist()
+        index = GPTVectorStoreIndex.from_documents(documents, service_context=service_context)
+        # index.storage_context.persist(persist_dir="./storage") # bugged in latest version :(
 
         query_engine = index.as_query_engine()
 
