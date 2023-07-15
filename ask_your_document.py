@@ -8,7 +8,7 @@ from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader, download_loa
 # https://platform.openai.com/account/api-keys
 #
 # TODO Replace this with your API key!
-DEFAULT_OPENAI_API_KEY = 'YOUR_OPENAI_KEY_HERE'
+DEFAULT_OPENAI_API_KEY = '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'
 
 def sanitize_filename(filename):
     # Remove any non-alphanumeric characters (except for underscores and hyphens)
@@ -29,6 +29,7 @@ def main():
         return
 
     os.environ["OPENAI_API_KEY"] = api_key
+    openai.api_key = api_key
 
     storage_dir = Path('./storage')
     # Sanitize the filename and create a unique docstore file based on the pdf filename
@@ -40,9 +41,9 @@ def main():
             storage_context = StorageContext.from_defaults(persist_dir=storage_dir)
             index = load_index_from_storage(storage_context)
         else:
-            PDFReader = download_loader("PDFReader")
-            loader = PDFReader()
-            documents = loader.load_data(file=Path(args.pdf))
+            PyMuPDFReader = download_loader("PyMuPDFReader")
+            loader = PyMuPDFReader()
+            documents = loader.load(file_path=Path(args.pdf), metadata=True)
 
             index = GPTVectorStoreIndex.from_documents(documents)
             index.storage_context.persist()
