@@ -1,6 +1,6 @@
 # Ask Your Document
 
-Ask Your Document is a Python script that allows you to extract information from a PDF document using a query written in plain language. The script uses the OpenAI's text-davinci-003 model and [llama-index](https://github.com/awesome-openai/gpt_index) library to read and understand the document, and then provides answers to your queries based on the content of the document.
+Ask Your Document is a Python script that allows you to extract information from a PDF document using a query written in plain language. The script uses the OpenAI's `gpt-3.5-turbo-16k` model and [llama-index](https://github.com/awesome-openai/gpt_index) library to read and understand the document, and then provides answers to your queries based on the content of the document.
 
 ## Prerequisites
 
