@@ -4,32 +4,70 @@ Ask Your Document is a Python script that allows you to extract information from
 
 ## Prerequisites
 
-- Python 3: If you don't already have Python 3 installed on your system, you can download it from the official Python [website](https://www.python.org/).
+- Python 3.11: If you don't already have Python 3.11 installed on your system, you can download it from the official Python [website](https://www.python.org/).
 - OpenAI API Key: You will need to obtain an API key from OpenAI. You can get your API key from the OpenAI [website](https://platform.openai.com/account/api-keys).
+- pip packages: various packages for python, installable with `pip` as described below
+
+# GUI Version:
 
 ## Installation
 
-1. Clone the project from GitHub (requires [git](https://github.com/git-guides/install-git)):
+1. Install python3.11
+
+2. Clone this project from GitHub (requires [git](https://github.com/git-guides/install-git)):
     ```bash
     git clone https://github.com/mkrupczak3/Ask-Your-Document
     ```
 
-2. Go into the project directory:
+3. Go into the project directory:
+    ```bash
+    cd ask_your_document # command may be 'dir' instead of cd on Windows
+    ```
+
+4. Copy your OpenAI API key into the file `api.key` and save it
+
+5. Install required pip packages
+    ```bash
+    python3.11 -m pip install -r requirements.txt
+    ```
+
+6. Run the program
+   ```bash
+   python3.11 ask_your_document_GUI.py
+   ```
+
+## Screenshot(s):
+
+![a screenshot showing a user prompt asking a question about the go programming language, using a book by dennis ritchie](./screenshots/gui_screenshot.png)
+
+
+# CLI Version:
+
+## Installation
+
+1. Install python3.11
+
+2. Clone the project from GitHub (requires [git](https://github.com/git-guides/install-git)):
+    ```bash
+    git clone https://github.com/mkrupczak3/Ask-Your-Document
+    ```
+
+3. Go into the project directory:
     ```bash
     cd ask_your_document
     ```
 
-3. Set up a Python virtual environment:
+4. Set up a Python virtual environment:
     ```bash
-    python3 -m venv env
+    python3.11 -m venv env
     ```
 
-4. Activate the virtual environment:
+5. Activate the virtual environment:
     ```bash
     source env/bin/activate  # On Windows use `env\Scripts\activate`
     ```
 
-5. Install the required packages:
+6. Install the required packages:
     ```bash
     pip install -r requirements.txt
     ```
@@ -39,7 +77,7 @@ Ask Your Document is a Python script that allows you to extract information from
 Once you've set up your environment and installed the necessary packages, you can use the `ask_your_document.py` script to query your PDF document.
 
 ```bash
-python3 ask_your_document.py --key 'YOUR_OPENAI_API_KEY' 'path_to_your_document.pdf' 'Your query here'
+python3.11 ask_your_document.py --key 'YOUR_OPENAI_API_KEY' 'path_to_your_document.pdf' 'Your query here'
 ```
 
 Replace `'YOUR_OPENAI_API_KEY'` with your actual OpenAI API key, `'path_to_your_document.pdf'` with the path to the PDF document you want to query, and `'Your query here'` with your actual query.
@@ -47,7 +85,7 @@ Replace `'YOUR_OPENAI_API_KEY'` with your actual OpenAI API key, `'path_to_your_
 For example, if your OpenAI API key is `abcd1234`, the document you want to query is `document.pdf` located in the same directory, and your query is "What is the title of this document?", you would run:
 
 ```bash
-python3 ask_your_document.py --key 'abcd1234' 'document.pdf' 'What is the title of this document?'
+python3.11 ask_your_document.py --key 'abcd1234' 'document.pdf' 'What is the title of this document?'
 ```
 
 ## Notes
