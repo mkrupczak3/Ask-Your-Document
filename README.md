@@ -41,6 +41,10 @@ Ask Your Document is a Python script that allows you to extract information from
 ![a screenshot showing a user prompt asking a question about the go programming language, using a book by dennis ritchie](./screenshots/gui_screenshot.png)
 
 
+## Notes:
+
+If the program displays an authentication error saying it can't authenticate with the OpenAI API, please ensure you've provided a valid API key in the file `api.key`
+
 # CLI Version:
 
 ## Installation
