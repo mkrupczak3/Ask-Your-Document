@@ -2,3 +2,5 @@ psutil==5.9.5
 llama-index==0.7.8
 openai==0.27.8
 pysimplegui>=4.60.5
+PySimpleGUI>=4.60.5
+# tkinter is also a requirement, but may need to be installed manually on your ssystem rather than with pip 

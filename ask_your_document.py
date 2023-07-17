@@ -46,7 +46,10 @@ def main():
 
         query_engine = index.as_query_engine()
 
-        print(query_engine.query(args.query))
+        result = query_engine.query(args.query)
+        print(result)
+        return result
+
     except openai.error.AuthenticationError:
         print("An error occurred while trying to authenticate with the OpenAI API. Please ensure you've provided a valid API key.")
 
