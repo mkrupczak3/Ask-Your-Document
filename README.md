@@ -12,6 +12,16 @@ Ask Your Document is a Python script that allows you to extract information from
 
 ## Installation
 
+### For Users
+
+Please visit:
+
+https://github.com/mkrupczak3/Ask-Your-Document/releases 
+
+...to obtain an executable for your system
+
+### For Developers
+
 1. Install python3.11
 
 2. Clone this project from GitHub (requires [git](https://github.com/git-guides/install-git)):
@@ -21,7 +31,7 @@ Ask Your Document is a Python script that allows you to extract information from
 
 3. Go into the project directory:
     ```bash
-    cd ask_your_document # command may be 'dir' instead of cd on Windows
+    cd ask_your_document
     ```
 
 4. Copy your OpenAI API key into the file `api.key` and save it
@@ -30,6 +40,13 @@ Ask Your Document is a Python script that allows you to extract information from
     ```bash
     python3.11 -m pip install -r requirements.txt
     ```
+6. Run the script `download_loader_PyMuPDFReader.py`
+   
+   This script downloads a hidden dependency for llama_index called PyMuPDFReader. Without it, the program would be unable to parse PDF documents.
+
+   ```bash
+   python3.11 download_loader_PyMuPDFReader.py
+   ```
 
 6. Run the program
    ```bash
