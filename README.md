@@ -2,12 +2,6 @@
 
 Ask Your Document is a Python script that allows you to extract information from a PDF document using a query written in plain language. The script uses the OpenAI's `gpt-3.5-turbo-16k` model and [llama-index](https://github.com/awesome-openai/gpt_index) library to read and understand the document, and then provides answers to your queries based on the content of the document.
 
-## Prerequisites
-
-- Python 3.11: If you don't already have Python 3.11 installed on your system, you can download it from the official Python [website](https://www.python.org/).
-- OpenAI API Key: You will need to obtain an API key from OpenAI. You can get your API key from the OpenAI [website](https://platform.openai.com/account/api-keys).
-- pip packages: various packages for python, installable with `pip` as described below
-
 # GUI Version:
 
 ## Installation
@@ -21,6 +15,15 @@ https://github.com/mkrupczak3/Ask-Your-Document/releases
 ...to obtain an executable for your system
 
 ### For Developers
+
+
+#### Prerequisites
+
+- Python 3.11: If you don't already have Python 3.11 installed on your system, you can download it from the official Python [website](https://www.python.org/).
+- OpenAI API Key: You will need to obtain an API key from OpenAI. You can get your API key from the OpenAI [website](https://platform.openai.com/account/api-keys).
+- pip packages: various packages for python, installable with `pip` as described below
+
+#### Installation
 
 1. Install python3.11
 
