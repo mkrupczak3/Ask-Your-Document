@@ -5,23 +5,31 @@ import argparse
 import openai
 import re
 from pathlib import Path
+import tiktoken
 from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader, download_loader, StorageContext, load_index_from_storage, KeywordTableIndex, SimpleDirectoryReader, LLMPredictor, ServiceContext
 from llama_index.llms import OpenAI
+# for use by pyinstaller only, remove this otherwise
+from llama_index.readers.llamahub_modules.file.pymu_pdf import base
 
-# Read OpenAI API key from the 'api.key' file in this directory
 # You must obtain an API key from OpenAI for use of this script:
 # https://platform.openai.com/account/api-keys
 #
-# TODO Replace the contents of the `api.key` file with your API key!
-try:
-    with open('api.key', 'r') as key_file:
-        DEFAULT_OPENAI_API_KEY = key_file.read().strip()
-        if not DEFAULT_OPENAI_API_KEY:
-            sg.Popup('Error', 'API key file is empty.')
-            sys.exit(1)
-except FileNotFoundError:
-    sg.Popup('Error', 'API key file not found.')
-    sys.exit(1)
+# TODO replace this with your API key!
+DEFAULT_OPENAI_API_KEY = 'YOUR_OPENAI_KEY_HERE'
+enc = tiktoken.get_encoding("gpt2")
+
+# attempt to read api key from file 'api.key' if it has not been provided in the line above
+if DEFAULT_OPENAI_API_KEY == 'YOUR_OPENAI_KEY_HERE':
+    try:
+        with open('api.key', 'r') as key_file:
+            DEFAULT_OPENAI_API_KEY = key_file.read().strip()
+            if not DEFAULT_OPENAI_API_KEY:
+                sg.Popup('Error', 'API key file is empty.')
+                sys.exit(1)
+    except FileNotFoundError:
+        sg.Popup('Error', 'API key file not found.')
+        # exit proram if the api key could not be found in either location
+        sys.exit(1)
 
 def sanitize_filename(filename):
     # Remove any non-alphanumeric characters (except for underscores and hyphens)
@@ -41,7 +49,9 @@ def run_model(input_file, query):
     service_context = ServiceContext.from_defaults(llm=llm)
 
     try:
-        PyMuPDFReader = download_loader("PyMuPDFReader")
+        # PyMuPDFReader = download_loader("PyMuPDFReader")
+        # for use with pyinstaller only, replace with above otherwise
+        PyMuPDFReader = base.PyMuPDFReader
         loader = PyMuPDFReader()
         documents = loader.load(file_path=Path(input_file), metadata=True)
 

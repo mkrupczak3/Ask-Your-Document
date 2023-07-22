@@ -10,3 +10,6 @@ storage/*
 **/._.DS_Store
 *.key
 env/*
+ask_your_document_GUI.spec
+build/*
+dist/*
